@@ -1,9 +1,10 @@
 const mysql = require("mysql2");
+require('dotenv').config();
 
 const connection = mysql.createConnection({
     host: "sql12.freemysqlhosting.net",
     user: "sql12746307",
-    password: "64xu4ZljRq",
+    password: process.env.DB_PASSWORD,
     database: "sql12746307"
 });
 
