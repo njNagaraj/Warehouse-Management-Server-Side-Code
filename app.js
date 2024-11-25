@@ -10,16 +10,15 @@ app.use(cors());
 app.get('/orders', (req, res) => {
     const query = 'SELECT * FROM order_table';
     db.query(query, (err, result) => {
-        if(err) {
-            console.log('There is a while retrieving data' + err);
+        if (err) {
+            console.log('Error retrieving data: ' + err);
+            res.status(500).json({ error: 'There was an error retrieving data from the database' });
             return;
         }
         res.json(result);
-        console.log(res);
-        console.log(result);
-    })
+    });
 });
 
-app.listen(port, ()=> {
-    console.log(`server running on port ${port}`);
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
