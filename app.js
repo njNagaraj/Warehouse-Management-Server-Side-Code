@@ -8,9 +8,10 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.get('/orders', (req, res) => {
-    const query = 'SELECT * FROM order_table';
-    db.query(query, (err, result) => {
+app.get('/orders/:id', (req, res) => {
+    const { id } = req.params;
+    const query = 'SELECT * FROM order_table WHERE warehouse_id = ?';
+    db.query(query, [id], (err, result) => {
         if (err) {
             console.error('Database Query Error: ', err.message);
             res.status(500).json({ error: err.message }); 
